@@ -1,0 +1,13 @@
+# Projekt React
+
+## Wytyczne
+1. Ustalmy sobie jako główny komponent ten z pliku `App.tsx`. Tam dodajemy routing i ścieżki do podstron z zadań (czyli login i home) i odpowiadającym im komponentom.
+2. Jakieś style dodajcie żeby to wyglądało w miarę czytelnie i ładnie (szczegóły dla Was). Możecie użyć zarówno `css modules` albo `styled components`.
+3. Starajcie się podzielić aplikację na popniejsze komponenty. Np komponent strony logowania osobno, komponent na przycisk logowania i wylogowania jako 1 (żeby wiedzieć jaki komponent ma być użyty to dodajcie parametr np text w props do tego komponentu i na jego podstawie pokazujecie tekst na przycisku). Analogicznie z komponentem inputa (w zależności od parametru type ma być to input zwykły tekstowy na login albo na hasło).
+4. Stan danych z inputa przechowujemy w useState danego komponentu i przesyłamy od razu na zmianę (onChange) do komponentu wyżej poprzez propsy. Analogicznie akcja naciśnięcia przycisku login (onClick) przesyłamy do komponentu rodzica przez propsy.
+
+## Zadania
+1. Stworzyć komponent z formularzem logowania (pola na login i hasło oraz przycisk na logowanie) pod ścieżką `/login` (czyli np `localhost:3000/login`), który na naciśnięcie przycisku logowania doda dane użytkownika (login i hasło) w postaci obiektu do localStorage pod polem o nazwie `user`.
+2. Stworzyć komponent ze stroną główną, która ma posiadać tylko napis na środku `Witaj w mojej aplikacji ${login_użytkownika}` oraz poniżej przycisk wyloguj, który na naciśnięcie wyrzuci użytkownika z localStorage oraz przekieruje na ekran logowania. Strona główna ma się znajdować pod ścieżką `/home` (czyli np `localhost:3000/home`).
+3. Dodać stan aplikacji w głównym komponencie App, który będzie przechowywał dane użytkownika z localStorage (wykorzystać `useState`). Będzie je pobierał na uruchomienie komponentu czyli na start aplikacji (tutaj przyda się użycie useEffect z pustą tablicą dependencies `useEffect(() => {...}, [])`). Główny komponent ma przykazywać ten stan do komponentów ponieżej poprzez propsy jeśli to potrzebne.
+4. Dodać sprawdzenie na start aplikacji w komponencie App czy w localStorage znajdują się dane użytkownika (czyli czy jest zalogowany), jeśli tak to robimy od razu przekierowanie na stronę główną (`/home`) a jeśli nie to robimy przekierowanie na stronę logowania (`/login`). Zablokować możliwość wejścia na podstronę `/home` jeśli użytkownik nie jest zalogowany oraz na odwrót zablokować możliwość wejścia na podstronę `/login` jeśli użytkownik jest zalogowany.
