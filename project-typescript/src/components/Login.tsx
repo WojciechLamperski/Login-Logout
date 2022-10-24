@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Button } from "./Button";
 
 export const Login = () : any => {
 
@@ -38,7 +38,7 @@ function handleChangePassword(event:any){
         <form>
             <input onChange={handleChangeLogin} placeholder="login" type="text"></input>
             <input onChange={handleChangePassword} placeholder="password" type="password"></input>
-            <button onClick={handleSubmit}>Submit</button>
+            <Button text="Submit"></Button>
         </form>
     )
 }

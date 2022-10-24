@@ -3,16 +3,18 @@ import {
     Route,
     NavLink,
     useNavigate,
+    BrowserRouter,
   } from "react-router-dom";
   
-  import { Home } from '../home/Home';
-  import { Login } from '../login/Login';
+  import { Home } from '../Home';
+  import { Login } from '../Login';
+  import { StyledNavbar } from "../styles/Navbar.styled";
 
 export const Navbar = () => {
     const navigate = useNavigate();
     return (
       <>
-        <nav className="navigation-header">
+      <StyledNavbar>
         <NavLink
             id="home"
             className={({ isActive }) =>
@@ -33,13 +35,10 @@ export const Navbar = () => {
           >
             Login
           </NavLink>
-        </nav>
+        </StyledNavbar>
+        
   
-        <Routes>
-          <Route path="home" element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="/" element={<Home />} />
-        </Routes>
+
       </>
     );
   }
