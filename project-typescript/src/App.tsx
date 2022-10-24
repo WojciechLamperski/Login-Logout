@@ -22,16 +22,17 @@ import { GlobalStyle } from './components/styles/Global.styles';
 
 function App() {
   return (
-      <BrowserRouter>
+    <BrowserRouter>
       <GlobalStyle />
       <Navbar/>
-        <Routes>
-          <Route path="home" element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
-
+      <div className='content'>
+      <Routes>
+        <Route path="home" element={<Home />} />
+        <Route path="login" element={<Login />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

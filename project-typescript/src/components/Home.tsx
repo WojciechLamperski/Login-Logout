@@ -1,7 +1,11 @@
+import { HomeStyled } from "./styles/Home.styled"
+
 export const Home = () : any => {
     return (
-        <div>
-            Witaj w mojej aplikacji login_użytkownika_here
-        </div>
+        <HomeStyled>
+            <p>
+                Witaj w mojej aplikacji <span>Henryku von der Linden </span> 
+            </p>
+        </HomeStyled>
     )
 }

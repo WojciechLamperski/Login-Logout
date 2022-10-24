@@ -1,3 +1,5 @@
-export const HomeStyled = () => {
+import styled from "styled-components";
 
-}
+export const HomeStyled:any = styled.main`
+
+`;
