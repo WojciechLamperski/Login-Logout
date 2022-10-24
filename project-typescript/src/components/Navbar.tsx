@@ -1,20 +1,12 @@
 import {
-  Routes,
-  Route,
   NavLink,
-  useNavigate,
-  BrowserRouter,
 } from "react-router-dom";
 
-import { Home } from './Home';
-import { Login } from './Login';
 import { StyledNavbar } from "./styles/Navbar.styled";
 
-export const Navbar = () => {
-  const navigate = useNavigate();
-  return (
-    <>
-    <StyledNavbar>
+export const Navbar:any = ():any => {
+  return(
+  <StyledNavbar>
       <NavLink
           id="home"
           className={({ isActive }) =>
@@ -24,8 +16,8 @@ export const Navbar = () => {
           end
         >
           Home
-        </NavLink>
-        <NavLink
+      </NavLink>
+      <NavLink
           id="login"
           className={({ isActive }) =>
             isActive ? "menu-item__active menu-item" : "menu-item"
@@ -34,15 +26,7 @@ export const Navbar = () => {
           end
         >
           Login
-        </NavLink>
-      </StyledNavbar>
-      
-
-      <Routes>
-        <Route path="home" element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </>
+      </NavLink>
+    </StyledNavbar>
   );
 }
