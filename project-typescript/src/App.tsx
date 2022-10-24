@@ -16,7 +16,7 @@ import { StyledNavbar } from './components/styles/Navbar.styled';
 import { Home } from './components/Home';
 import { Button } from './components/Button';
 import { Login } from './components/Login';
-import { Input } from './components/Input';
+import { Inputs } from './components/Inputs';
 import { Navbar } from './components/Navbar'
 import { GlobalStyle } from './components/styles/Global.styles';
 
