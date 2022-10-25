@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import { BrowserRouter } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 import { Routes, Route } from "react-router-dom"
 
@@ -27,6 +28,7 @@ function App() {
   const [user, setUser] = useState<null | string>(null);
 
     function handleSubmit(e : any) : void {
+
         e.preventDefault();
 
         const obj = {name: login, password: password};
@@ -35,6 +37,7 @@ function App() {
         const myJSON = JSON.stringify(obj);
 
         localStorage.setItem('user', myJSON);
+
     } 
     
 
