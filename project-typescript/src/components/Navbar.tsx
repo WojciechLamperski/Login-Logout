@@ -4,7 +4,7 @@ import {
 
 import { StyledNavbar } from "./styles/Navbar.styled";
 
-export const Navbar:any = ():any => {
+export const Navbar:any = ({logout, user}:any):any => {
   return(
   <StyledNavbar>
       <NavLink
@@ -17,7 +17,7 @@ export const Navbar:any = ():any => {
         >
           Home
       </NavLink>
-      <NavLink
+      <NavLink onClick={logout}
           id="login"
           className={({ isActive }) =>
             isActive ? "menu-item__active menu-item" : "menu-item"
@@ -25,7 +25,7 @@ export const Navbar:any = ():any => {
           to="/login"
           end
         >
-          Login
+          { user ? 'Logout' : 'Login'}
       </NavLink>
     </StyledNavbar>
   );

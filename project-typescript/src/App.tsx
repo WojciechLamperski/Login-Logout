@@ -20,15 +20,49 @@ import { Inputs } from './components/Inputs';
 import { Navbar } from './components/Navbar'
 import { GlobalStyle } from './components/styles/Global.styles';
 
-function App() {
+function App() {   
+  
+  const [login, setLogin] = useState<string>('');
+  const [password, setPassword] = useState('');
+  const [user, setUser] = useState<null | string>(null);
+
+    function handleSubmit(e : any) : void {
+        e.preventDefault();
+
+        const obj = {name: login, password: password};
+        console.log(obj);
+        setUser(login);
+        const myJSON = JSON.stringify(obj);
+
+        localStorage.setItem('user', myJSON);
+    } 
+    
+
+    function handleChangeLogin(event:any){
+        setLogin(event.target.value);
+        console.log(event.target.value);
+    }
+        
+    function handleChangePassword(event:any){
+        setPassword(event.target.value);
+        console.log(event.target.value);
+    }
+
+    function logout():any{
+      localStorage.clear();
+      setUser(null);
+    }
+  
+
+
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <Navbar/>
+      <Navbar user={user} logout={logout}/>
       <div className='content'>
       <Routes>
-        <Route path="home" element={<Home />} />
-        <Route path="login" element={<Login />} />
+        <Route path="home" element={<Home user={user} />} />
+        <Route path="login" element={<Login handleChangePassword={handleChangePassword} handleChangeLogin={handleChangeLogin} handleSubmit={handleSubmit}/>} />
         <Route path="/" element={<Home />} />
       </Routes>
       </div>
