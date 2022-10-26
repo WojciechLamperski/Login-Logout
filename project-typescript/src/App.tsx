@@ -1,28 +1,36 @@
-import React from "react";
-import logo from "./logo.svg";
-
-import { BrowserRouter } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-import { Routes, Route } from "react-router-dom";
-
-import { NavLink } from "react-router-dom";
-
-import { StyledNavbar } from "./components/styles/Navbar.styled";
-
 import { Home } from "./components/Home";
-import { Button } from "./components/Button";
 import { Login } from "./components/Login";
 import { Navbar } from "./components/Navbar";
 import { GlobalStyle } from "./components/styles/Global.styles";
-import { handleChange } from "./components/useHandleChange";
 
 function App() {
-  const [login, setLogin] = useState<string>("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState<null | string>(null);
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      const newUser: any = localStorage.getItem("user");
+      const newNewUSer: any = JSON.parse(newUser).name;
+
+      setUser(newNewUSer);
+    }
+  }, []);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    } else {
+      navigate("/login");
+    }
+  }, [user]);
 
   function logout(): any {
     localStorage.clear();
@@ -30,7 +38,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <>
       <GlobalStyle />
       <Navbar user={user} logout={logout} />
       <div className="content">
@@ -51,7 +59,7 @@ function App() {
           <Route path="/" element={<Home />} />
         </Routes>
       </div>
-    </BrowserRouter>
+    </>
   );
 }
 
