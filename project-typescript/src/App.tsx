@@ -18,21 +18,12 @@ import { Login } from "./components/Login";
 import { Inputs } from "./components/Inputs";
 import { Navbar } from "./components/Navbar";
 import { GlobalStyle } from "./components/styles/Global.styles";
+import { handleChange } from "./components/useHandleChange";
 
 function App() {
   const [login, setLogin] = useState<string>("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState<null | string>(null);
-
-  function handleChangeLogin(event: any) {
-    setLogin(event.target.value);
-    console.log(event.target.value);
-  }
-
-  function handleChangePassword(event: any) {
-    setPassword(event.target.value);
-    console.log(event.target.value);
-  }
 
   function logout(): any {
     localStorage.clear();
@@ -50,11 +41,11 @@ function App() {
             path="login"
             element={
               <Login
-                handleChangePassword={handleChangePassword}
-                handleChangeLogin={handleChangeLogin}
                 setUser={setUser}
                 login={login}
                 password={password}
+                setLogin={setLogin}
+                setPassword={setPassword}
               />
             }
           />

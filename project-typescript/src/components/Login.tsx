@@ -1,6 +1,7 @@
 import { Button } from "./Button";
 import { Inputs } from "./Inputs";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useGetUsers } from "./useGetUsers";
 
 export const Login = ({
   handleChangeLogin,
@@ -9,21 +10,11 @@ export const Login = ({
   password,
   setUser,
 }: any): any => {
-  const navigate = useNavigate();
-
-  function handleSubmit(e: any): void {
-    e.preventDefault();
-
-    const obj = { name: login, password: password };
-    console.log(obj);
-
-    setUser(login);
-
-    const myJSON = JSON.stringify(obj);
-
-    localStorage.setItem("user", myJSON);
-    navigate("/home");
-  }
+  const { handleSubmit } = useGetUsers({
+    login,
+    password,
+    setUser,
+  });
 
   return (
     <form onSubmit={handleSubmit}>
