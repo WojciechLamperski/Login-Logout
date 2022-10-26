@@ -1,12 +1,11 @@
-import { HomeStyled } from "./styles/Home.styled"
+import { HomeStyled } from "./styles/Home.styled";
 
-export const Home = (props:any) : any => {
-
-    return (
-        <HomeStyled>
-            <p>
-                Witaj w mojej aplikacji <span>{props.user}</span> 
-            </p>
-        </HomeStyled>
-    )
-}
+export const Home = ({ user }: any): any => {
+  return (
+    <HomeStyled>
+      <p>
+        {user ? `Witaj w mojej aplikacji ${user}` : "Proszę zaloguj się :)"}
+      </p>
+    </HomeStyled>
+  );
+};

@@ -1,75 +1,65 @@
-import React from 'react';
-import logo from './logo.svg';
-
-import { BrowserRouter } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import { Routes, Route } from "react-router-dom"
+import { Home } from "./components/Home";
+import { Login } from "./components/Login";
+import { Navbar } from "./components/Navbar";
+import { GlobalStyle } from "./components/styles/Global.styles";
 
-import {
-  NavLink
-} from "react-router-dom";
+function App() {
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, setUser] = useState<any>(null);
 
-import { StyledNavbar } from './components/styles/Navbar.styled';
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      const newUser: any = localStorage.getItem("user");
+      const newNewUSer: any = JSON.parse(newUser).name;
 
-import { Home } from './components/Home';
-import { Button } from './components/Button';
-import { Login } from './components/Login';
-import { Inputs } from './components/Inputs';
-import { Navbar } from './components/Navbar'
-import { GlobalStyle } from './components/styles/Global.styles';
-
-function App() {   
-  
-  const [login, setLogin] = useState<string>('');
-  const [password, setPassword] = useState('');
-  const [user, setUser] = useState<null | string>(null);
-
-    function handleSubmit(e : any) : void {
-
-        e.preventDefault();
-
-        const obj = {name: login, password: password};
-        console.log(obj);
-        setUser(login);
-        const myJSON = JSON.stringify(obj);
-
-        localStorage.setItem('user', myJSON);
-
-    } 
-    
-
-    function handleChangeLogin(event:any){
-        setLogin(event.target.value);
-        console.log(event.target.value);
+      setUser(newNewUSer);
     }
-        
-    function handleChangePassword(event:any){
-        setPassword(event.target.value);
-        console.log(event.target.value);
-    }
+  }, []);
 
-    function logout():any{
-      localStorage.clear();
-      setUser(null);
-    }
-  
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    } else {
+      navigate("/login");
+    }
+  }, [user]);
+
+  function logout(): any {
+    localStorage.clear();
+    setUser(null);
+  }
 
   return (
-    <BrowserRouter>
+    <>
       <GlobalStyle />
-      <Navbar user={user} logout={logout}/>
-      <div className='content'>
-      <Routes>
-        <Route path="home" element={<Home user={user} />} />
-        <Route path="login" element={<Login handleChangePassword={handleChangePassword} handleChangeLogin={handleChangeLogin} handleSubmit={handleSubmit}/>} />
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <Navbar user={user} logout={logout} />
+      <div className="content">
+        <Routes>
+          <Route path="home" element={<Home user={user} />} />
+          <Route
+            path="login"
+            element={
+              <Login
+                setUser={setUser}
+                login={login}
+                password={password}
+                setLogin={setLogin}
+                setPassword={setPassword}
+              />
+            }
+          />
+          <Route path="/" element={<Home />} />
+        </Routes>
       </div>
-    </BrowserRouter>
+    </>
   );
 }
 
