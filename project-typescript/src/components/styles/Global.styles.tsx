@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyle:any = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
 
 .content{
   flex-grow: 1;
