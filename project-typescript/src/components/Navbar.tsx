@@ -1,32 +1,30 @@
-import {
-  NavLink,
-} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { StyledNavbar } from "./styles/Navbar.styled";
 
-export const Navbar:any = ({logout, user}:any):any => {
-  return(
-  <StyledNavbar>
-      <NavLink
-          id="home"
-          className={({ isActive }) =>
-            isActive ? "menu-item__active menu-item" : "menu-item"
-          }
-          to="/home"
-          end
-        >
-          Home
-      </NavLink>
-      <NavLink onClick={logout}
-          id="login"
-          className={({ isActive }) =>
-            isActive ? "menu-item__active menu-item" : "menu-item"
-          }
-          to="/login"
-          end
-        >
-          { user ? 'Logout' : 'Login'}
-      </NavLink>
-    </StyledNavbar>
-  );
+interface NavbarProps {
+	logout: () => void;
+	user: string | null;
 }
+
+export const Navbar: React.FC<NavbarProps> = ({ logout, user }) => {
+	return (
+		<StyledNavbar>
+			<NavLink
+				id="home"
+				to="/home"
+				end
+			>
+				Home
+			</NavLink>
+			<NavLink
+				onClick={logout}
+				id="login"
+				to="/login"
+				end
+			>
+				{user ? "Logout" : "Login"}
+			</NavLink>
+		</StyledNavbar>
+	);
+};

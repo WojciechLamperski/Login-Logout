@@ -1,11 +1,13 @@
 import { HomeStyled } from "./styles/Home.styled";
 
-export const Home = ({ user }: any): any => {
-  return (
-    <HomeStyled>
-      <p>
-        {user ? `Witaj w mojej aplikacji ${user}` : "Proszę zaloguj się :)"}
-      </p>
-    </HomeStyled>
-  );
+interface HomeProps {
+	user?: string | null;
+}
+
+export const Home: React.FC<HomeProps> = ({ user }) => {
+	return (
+		<HomeStyled>
+			<p>{user ? `Witaj w mojej aplikacji ${user}` : "Proszę zaloguj się :)"}</p>
+		</HomeStyled>
+	);
 };

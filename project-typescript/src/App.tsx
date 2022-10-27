@@ -9,58 +9,67 @@ import { Navbar } from "./components/Navbar";
 import { GlobalStyle } from "./components/styles/Global.styles";
 
 function App() {
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState<any>(null);
+	const [login, setLogin] = useState("");
+	const [password, setPassword] = useState("");
+	const [user, setUser] = useState<null | string>(null);
 
-  useEffect(() => {
-    if (localStorage.getItem("user")) {
-      const newUser: any = localStorage.getItem("user");
-      const newNewUSer: any = JSON.parse(newUser).name;
+	useEffect(() => {
+		if (localStorage.getItem("user")) {
+			const newUser: any = localStorage.getItem("user");
+			const newNewUSer: any = JSON.parse(newUser).name;
 
-      setUser(newNewUSer);
-    }
-  }, []);
+			setUser(newNewUSer);
+		}
+	}, []);
 
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user) {
-      navigate("/home");
-    } else {
-      navigate("/login");
-    }
-  }, [user]);
+	useEffect(() => {
+		if (user) {
+			navigate("/home");
+		} else {
+			navigate("/login");
+		}
+	}, [user]);
 
-  function logout(): any {
-    localStorage.clear();
-    setUser(null);
-  }
+	function logout() {
+		localStorage.clear();
+		setUser(null);
+	}
 
-  return (
-    <>
-      <GlobalStyle />
-      <Navbar user={user} logout={logout} />
-      <div className="content">
-        <Routes>
-          <Route path="home" element={<Home user={user} />} />
-          <Route
-            path="login"
-            element={
-              <Login
-                setUser={setUser}
-                login={login}
-                password={password}
-                setLogin={setLogin}
-                setPassword={setPassword}
-              />
-            }
-          />
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </div>
-    </>
-  );
+	return (
+		<>
+			<GlobalStyle />
+			<Navbar
+				user={user}
+				logout={logout}
+			/>
+			<div className="content">
+				<Routes>
+					<Route
+						path="home"
+						element={<Home user={user} />}
+					/>
+					<Route
+						path="login"
+						element={
+							<Login
+								setUser={setUser}
+								login={login}
+								password={password}
+								setLogin={setLogin}
+								setPassword={setPassword}
+							/>
+						}
+					/>
+					<Route
+						path="/"
+						element={<Home />}
+					/>
+				</Routes>
+			</div>
+		</>
+	);
 }
 
 export default App;
